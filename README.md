@@ -36,10 +36,8 @@ This repository is all about arduino and its sensors
 
 
 ``` bash
-# install virtual environment
+# install arduino
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
 <!-- CONTRIBUTING -->
 ## Contributing
