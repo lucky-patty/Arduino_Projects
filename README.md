@@ -24,7 +24,7 @@ This repository is all about arduino and its sensors
 
 ## List of the Project in Playground so far 
 
-  - POV clock (arduino)
+  - POV clock 
   - Human Detector (ultrasonic)
   
 ### Built With
