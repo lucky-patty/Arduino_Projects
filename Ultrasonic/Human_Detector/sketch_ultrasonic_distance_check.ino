@@ -1,6 +1,6 @@
 // defines number of seconds and minutes
-#define numberOfSeconds(time)  ((_time_/ 1000) % 60)
-#define numberOfMinutes(time)  (((_time_/ 1000) / 60) % 60)
+#define numberOfSeconds(_time_)  ((_time_/ 1000) % 60)
+#define numberOfMinutes(_time_)  (((_time_/ 1000) / 60) % 60)
 
 //1000ms in 1sec, 60sec in 1min, 60mins in 1hr. So, 1000x60x60 = 3600000ms = 1hr
 unsigned long timeLimit = 3600000;
@@ -8,11 +8,11 @@ unsigned long timeLimit30Min = 1800000;
 unsigned long timeLimit5Min = 300000;
 
 // defines pins numbers
-const int trigPin = Pinnumbers;             // Connect trig pin to
-const int echoPin = Pinnumbers;             // Connect echo pin to
-const int buzzer = Pinnumbers;              // Connect buzzer pin to
-const int resetButton = Pinnumbers;         // Connect ResetButton pin to
-const int snoozeButton = Pinnumbers;        // Connect SnoozeButton pin to
+const int trigPin = 12;             // Connect trig pin to
+const int echoPin = 13;             // Connect echo pin to
+const int buzzer = 9;              // Connect buzzer pin to
+const int resetButton = 7;         // Connect ResetButton pin to
+const int snoozeButton = 6;        // Connect SnoozeButton pin to
 
 //defines variables
 
