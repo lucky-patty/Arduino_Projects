@@ -1,5 +1,7 @@
 /*
  *    This project use 9g servo,
+ *    Manipulate position via pos variable
+ *    Then make change to servo
  *
  */
 
