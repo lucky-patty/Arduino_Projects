@@ -21,9 +21,9 @@ int distance;
 
 //change variable state
 int snoozeButtonCount = 0;        // variable for counting snooze button
-int resetButtonCount = 0;         // variable for counting reset  button 
+int resetButtonCount = 0;         // variable for counting reset  button
 
-// Check Snooze State 
+// Check Snooze State
 boolean snoozeState = false;
 
 void setup() {
@@ -41,16 +41,16 @@ void loop() {
   // Clear the trigPin
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
-  
+
   // Sets the trigPin on HIGH state for 10 micro seconds
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  
+
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echoPin, HIGH);
 
-  
+
   // Calculating the distance
   distance = duration*0.034/2;
 
@@ -58,12 +58,12 @@ void loop() {
   Serial.print("Distance: ");
   Serial.println(distance);
 
- 
-   
+
+
   // Object is detected
-  while(distance <= 40){
-    
-     
+  if(distance <= 40){
+
+
      Serial.println("People Detected");
 
      if(snoozeState == true){
@@ -71,7 +71,7 @@ void loop() {
         if(timeRemainingSnooze > 0){
             // To display the countdown in mm:ss format, separate parts
             int seconds = numberOfSeconds (timeRemainingSnooze);
-            int minutes = numberOfMinutes (timeRemainingSnooze);    
+            int minutes = numberOfMinutes (timeRemainingSnooze);
         }
 
         if(timeRemainingSnooze == 0){
@@ -79,101 +79,103 @@ void loop() {
           digitalWrite(buzzer,HIGH);
           break;
         }
-        
+
      }else{
        unsigned long timeRemaining = timeLimit - millis();
 
        if(timeRemaining > 0){
-        
+
         // To display the countdown in mm:ss format, separate parts
         int seconds = numberOfSeconds (timeRemaining);
         int minutes = numberOfMinutes (timeRemaining);
-        
+
        }
-        // If time remaining is 0 
+        // If time remaining is 0
         if(timeRemaining == 0){
           // Buzzer
           digitalWrite(buzzer,HIGH);
           break;
         }
-      
+
      }
   }
-
   // Object is not detected
-  while(distance > 40){
+
+  else if(distance > 40){
+
+
     Serial.println("People not detected!");
 
     unsigned long timeRemaining = timeLimit30Min - millis();
 
     if(timeRemaining > 0){
-      
+
       // To display the countdown in mm:ss format, separate parts
       int seconds = numberOfSeconds (timeRemaining);
       int minutes = numberOfMinutes (timeRemaining);
-  
+
       // Update the time remaining
       timeRemaining = timeLimit30Min - millis();
-      
+
      }
 
-     // If time remaining is 0 
+     // If time remaining is 0
      if(timeRemaining == 0){
         // Buzzer
         digitalWrite(buzzer,HIGH);
         break;
      }
-     
+
   }
 
   // Check Buzzer State
   int checkBuzzer = digitalRead(buzzer);
-  
+
   if(checkBuzzer == HIGH){
 
-  
+
       // Snooze incoming
       int checkCurrentSnooze = digitalRead(snoozeButton);
-    
+
       // Initial Case (Happen Once)
       if(checkCurrentSnooze == HIGH && snoozeButtonCount == 0){
 
-          // Increase count for snooze button 
+          // Increase count for snooze button
           snoozeButtonCount++;
-    
+
           snoozeState = true;
           digitalWrite(buzzer,LOW);
-      
+
     }else{
-      
+
        snoozeButtonCount++;
        snoozeState = true;
        digitalWrite(buzzer,LOW);
-   
+
     }
-   
+
   }
-  
+
   // Reset Button
   int checkCurrentReset = digitalRead(resetButton);
 
   /**
-   * First time reset button get call 
+   * First time reset button get call
    * Action : Silence buzzer (if HIGH) and the program will loop itself again
    */
   if(checkCurrentReset == HIGH && resetButtonCount == 0){
-      
+
      snoozeButtonCount++;
-     
+
      if(checkBuzzer == HIGH){
        digitalWrite(buzzer, LOW);
      }
   }else{
     snoozeButtonCount++;
-    
+
     if(checkBuzzer == HIGH){
       digitalWrite(buzzer,LOW);
     }
   }
-  
-} 
+
+}
